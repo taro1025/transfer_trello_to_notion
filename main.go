@@ -1,10 +1,12 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"github.com/joho/godotenv"
 	"github.com/sclevine/agouti"
 	"log"
+	"os"
 	"time"
 	"transfer/notion"
 	"transfer/trello"
@@ -24,11 +26,30 @@ func main() {
 	trello.Login(page)
 	tasks := trello.DrainTasks(page)
 
+	confirm(tasks)
+
 	notion.Login(page)
 
 	notion.PasteTasks(page, tasks)
 
 	time.Sleep(10 * time.Second)
+}
+
+func confirm(tasks [][]string) {
+	for _, task := range tasks {
+		fmt.Print("タイトル:　")
+		fmt.Println(task[0])
+		fmt.Println("------------説明------------")
+		_, err := fmt.Println(task[1])
+		if err != nil {
+			log.Fatal("Error: 説明がない？")
+		}
+		fmt.Println("---------------------------")
+	}
+
+	fmt.Println("タスクの取得が完了しました。ノーションに移行してよければエンターを押してください。:")
+	input := bufio.NewScanner(os.Stdin)
+	input.Scan()
 }
 
 func loadEnv() {
