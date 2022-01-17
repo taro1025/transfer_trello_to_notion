@@ -7,7 +7,6 @@ import (
 	"github.com/sclevine/agouti"
 	"log"
 	"os"
-	"time"
 	"transfer/notion"
 	"transfer/trello"
 )
@@ -32,7 +31,9 @@ func main() {
 
 	notion.PasteTasks(page, tasks)
 
-	time.Sleep(10 * time.Second)
+	fmt.Println("タスクの移行が完了しました。savingが終わったらエンターしてください。:")
+	input := bufio.NewScanner(os.Stdin)
+	input.Scan()
 }
 
 func confirm(tasks [][]string) {

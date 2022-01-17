@@ -26,7 +26,7 @@ func DrainTasks(page *agouti.Page) [][]string {
 	page.Navigate("https://trello.com/b/joePfsTs/%E7%8F%BE%E5%9C%A8%E9%96%8B%E7%99%BA%E4%B8%AD")
 	time.Sleep(5 * time.Second)
 
-	// 要企画、企画、開発・
+	// 要企画。他の場所を取りたければAtをかえる
 	rows := page.Find("div.board-canvas > div#board").All("div.js-list.list-wrapper").At(1)
 
 	tasksElement := rows.Find("div.list.js-list-content > div.list-cards").All("a.list-card")

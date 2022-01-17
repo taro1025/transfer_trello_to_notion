@@ -27,6 +27,7 @@ func PasteTasks(page *agouti.Page, tasks [][]string) {
 	for _, task := range tasks {
 		addTask(page)
 		//タイトルを埋める
+		time.Sleep(500 * time.Millisecond)
 		inputTitle := page.Find("#notion-app > div > div.notion-cursor-listener > div:nth-child(2) > div.notion-frame > div.notion-scroller.vertical.horizontal > div:nth-child(3) > div > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > a > div > div:nth-child(2) > div")
 		inputTitle.Fill(task[0])
 		//適当なところクリックして入力状態を解除
@@ -57,6 +58,7 @@ func addTask(page *agouti.Page) {
 	if err != nil {
 		log.Fatal(err)
 	}
+	time.Sleep(100 * time.Millisecond)
 	err = newButton.Click()
 	if err != nil {
 		log.Fatal(err)
